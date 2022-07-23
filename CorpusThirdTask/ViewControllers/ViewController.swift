@@ -32,6 +32,7 @@ class ViewController: UIViewController {
             textView.heightAnchor.constraint(equalToConstant: view.frame.height / 4)
         ])
         textView.isEditable = true
+        textView.delegate = self
         textView.backgroundColor = .white
         textView.keyboardDismissMode = .onDrag
         textView.font = .systemFont(ofSize: 20)
@@ -68,9 +69,14 @@ class ViewController: UIViewController {
         return sendButton
     }()
     
+    var lastText = ""
+    
     var result: ResponceModel? {
         didSet {
-            print(result)
+            sendButton.isEnabled = false
+            textView.backgroundColor = .yellow
+            textView.text = ""
+            textView.text = result!.result
         }
     }
   
@@ -84,13 +90,13 @@ class ViewController: UIViewController {
     }
     @objc func send() {
         guard let selector = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex) else { return }
-        print("sel = \(selector)")
         guard let text = textView.text else { return }
         if !text.isEmpty {
+            lastText = text
             postText(text: text, checkbox1: 0, checkbox2: 0, checkbox3: 1, mode: "radiobutton2", selector: selector)
         textView.resignFirstResponder()
         } else {
-            
+        
         }
     }
     
@@ -107,5 +113,13 @@ class ViewController: UIViewController {
             }
             self.result = data
         }
+    }
+}
+
+extension ViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        sendButton.isEnabled = true
+        textView.text = lastText
+        textView.backgroundColor = .white
     }
 }

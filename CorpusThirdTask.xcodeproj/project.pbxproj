@@ -18,7 +18,6 @@
 		E366D1FD288C002C00440D51 /* CorpusThirdTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366D1FC288C002C00440D51 /* CorpusThirdTaskTests.swift */; };
 		E366D207288C002C00440D51 /* CorpusThirdTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366D206288C002C00440D51 /* CorpusThirdTaskUITests.swift */; };
 		E366D209288C002C00440D51 /* CorpusThirdTaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366D208288C002C00440D51 /* CorpusThirdTaskUITestsLaunchTests.swift */; };
-		E366D216288C083200440D51 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366D215288C083200440D51 /* StringExtension.swift */; };
 		E366D21B288C1BCA00440D51 /* ResponceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E366D21A288C1BCA00440D51 /* ResponceModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +59,6 @@
 		E366D202288C002C00440D51 /* CorpusThirdTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CorpusThirdTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E366D206288C002C00440D51 /* CorpusThirdTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusThirdTaskUITests.swift; sourceTree = "<group>"; };
 		E366D208288C002C00440D51 /* CorpusThirdTaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpusThirdTaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E366D215288C083200440D51 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E366D21A288C1BCA00440D51 /* ResponceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponceModel.swift; sourceTree = "<group>"; };
 		FE3B51C5DDCFBEB1B0C40592 /* Pods_CorpusThirdTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CorpusThirdTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -144,7 +142,6 @@
 				E366D1E5288C002500440D51 /* AppDelegate.swift */,
 				E366D1E7288C002500440D51 /* SceneDelegate.swift */,
 				E366D219288C1BB700440D51 /* Models */,
-				E366D217288C1B9800440D51 /* Extensions */,
 				E366D218288C1BAC00440D51 /* ViewControllers */,
 				E366D1EE288C002B00440D51 /* Assets.xcassets */,
 				E366D1F0288C002B00440D51 /* LaunchScreen.storyboard */,
@@ -168,14 +165,6 @@
 				E366D208288C002C00440D51 /* CorpusThirdTaskUITestsLaunchTests.swift */,
 			);
 			path = CorpusThirdTaskUITests;
-			sourceTree = "<group>";
-		};
-		E366D217288C1B9800440D51 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E366D215288C083200440D51 /* StringExtension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E366D218288C1BAC00440D51 /* ViewControllers */ = {
@@ -433,7 +422,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E366D21B288C1BCA00440D51 /* ResponceModel.swift in Sources */,
-				E366D216288C083200440D51 /* StringExtension.swift in Sources */,
 				E366D1EA288C002500440D51 /* ViewController.swift in Sources */,
 				E366D1E6288C002500440D51 /* AppDelegate.swift in Sources */,
 				E366D1E8288C002500440D51 /* SceneDelegate.swift in Sources */,
