@@ -65,7 +65,7 @@ class ViewController: UIViewController {
             modePickerView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 4),
             modePickerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             modePickerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
-            modePickerView.heightAnchor.constraint(equalToConstant: 50)
+            modePickerView.heightAnchor.constraint(equalToConstant: 40)
         ])
         return modePickerView
     }()
@@ -75,16 +75,59 @@ class ViewController: UIViewController {
         view.addSubview(sendButton)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sendButton.topAnchor.constraint(equalTo: modePickerView.bottomAnchor, constant: 24),
+            sendButton.topAnchor.constraint(equalTo: checkboxStackView.bottomAnchor, constant: 24),
             sendButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             sendButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
         ])
-        sendButton.setTitle(" Паказаць уведзены тэкст \nі абраныя наладкі! ", for: .normal)
+        sendButton.setTitle("Паказаць уведзены тэкст \nі абраныя наладкі!", for: .normal)
         sendButton.titleLabel?.numberOfLines = 0
         sendButton.titleLabel?.textAlignment = .center
         sendButton.backgroundColor = .darkGray
         sendButton.layer.cornerRadius = 5
         return sendButton
+    }()
+    
+    lazy var checkboxStackView: UIStackView = {
+        var checkboxStackView = UIStackView()
+        view.addSubview(checkboxStackView)
+        checkboxStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            checkboxStackView.topAnchor.constraint(equalTo: modePickerView.bottomAnchor, constant: 4),
+            checkboxStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            checkboxStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
+        ])
+        checkboxStackView.axis = .horizontal
+        checkboxStackView.distribution = .fillEqually
+        checkboxStackView.spacing = 4
+        checkboxStackView.addArrangedSubview(checkbox1Button)
+        checkboxStackView.addArrangedSubview(checkbox2Button)
+        checkboxStackView.addArrangedSubview(checkbox3Button)
+        return checkboxStackView
+    }()
+    
+    lazy var checkbox1Button: UIButton = {
+        var checkbox1Button = UIButton()
+        checkbox1Button.setTitle("checkbox1", for: .normal)
+        checkbox1Button.backgroundColor = .lightGray
+        checkbox1Button.setTitleColor(.black, for: .normal)
+        checkbox1Button.layer.cornerRadius = 5
+        return checkbox1Button
+    }()
+    lazy var checkbox2Button: UIButton = {
+        var checkbox2Button = UIButton()
+        checkbox2Button.setTitle("checkbox3", for: .normal)
+        checkbox2Button.backgroundColor = .lightGray
+        checkbox2Button.setTitleColor(.black, for: .normal)
+        checkbox2Button.layer.cornerRadius = 5
+        return checkbox2Button
+    }()
+    lazy var checkbox3Button: UIButton = {
+        var checkbox3Button = UIButton()
+        checkbox3Button.setTitle("checkbox3", for: .normal)
+        checkbox3Button.backgroundColor = .lightGray
+        checkbox3Button.setTitleColor(.black, for: .normal)
+        checkbox3Button.layer.cornerRadius = 5
+        return checkbox3Button
     }()
     
     var modeArray = ["radiobutton1", "radiobutton2", "radiobutton3"]
@@ -106,18 +149,46 @@ class ViewController: UIViewController {
         segmentedControl.selectedSegmentIndex = 0
         modePickerView.backgroundColor = .white
         sendButton.addTarget(self, action: #selector(send), for: .touchUpInside)
+        checkbox1Button.addTarget(self, action: #selector(checkboxAction1), for: .touchUpInside)
+        checkbox2Button.addTarget(self, action: #selector(checkboxAction2), for: .touchUpInside)
+        checkbox3Button.addTarget(self, action: #selector(checkboxAction3), for: .touchUpInside)
         view.backgroundColor = .lightGray
     }
     @objc func send() {
         guard let selector = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex) else { return }
         guard let text = textView.text else { return }
         let mode = modeArray[modePickerView.selectedRow(inComponent: 0)]
+        let checkbox1 = checkbox1Button.backgroundColor == .lightGray ? 0 : 1
+        let checkbox2 = checkbox2Button.backgroundColor == .lightGray ? 0 : 1
+        let checkbox3 = checkbox3Button.backgroundColor == .lightGray ? 0 : 1
         if !text.isEmpty {
             lastText = text
-            postText(text: text, checkbox1: 0, checkbox2: 0, checkbox3: 1, mode: mode, selector: selector)
+            postText(text: text, checkbox1: checkbox1, checkbox2: checkbox2, checkbox3: checkbox3, mode: mode, selector: selector)
         textView.resignFirstResponder()
         } else {
         
+        }
+    }
+    
+    @objc func checkboxAction1() {
+        if checkbox1Button.backgroundColor == .lightGray {
+            checkbox1Button.backgroundColor = .white
+        } else {
+            checkbox1Button.backgroundColor = .lightGray
+        }
+    }
+    @objc func checkboxAction2() {
+        if checkbox2Button.backgroundColor == .lightGray {
+            checkbox2Button.backgroundColor = .white
+        } else {
+            checkbox2Button.backgroundColor = .lightGray
+        }
+    }
+    @objc func checkboxAction3() {
+        if checkbox3Button.backgroundColor == .lightGray {
+            checkbox3Button.backgroundColor = .white
+        } else {
+            checkbox3Button.backgroundColor = .lightGray
         }
     }
     
