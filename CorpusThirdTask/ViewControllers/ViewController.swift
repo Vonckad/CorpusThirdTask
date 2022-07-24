@@ -14,7 +14,8 @@ class ViewController: UIViewController {
         var titleLabel: UILabel = UILabel(frame: .zero)
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = .systemFont(ofSize: 20)
+        titleLabel.font = .boldSystemFont(ofSize: 22)
+        titleLabel.textColor = .black
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
         textView.isEditable = true
         textView.delegate = self
         textView.backgroundColor = .white
+        textView.textColor = .black
         textView.keyboardDismissMode = .onDrag
         textView.font = .systemFont(ofSize: 20)
         textView.layer.cornerRadius = 5
@@ -75,7 +77,7 @@ class ViewController: UIViewController {
         view.addSubview(sendButton)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sendButton.topAnchor.constraint(equalTo: checkboxStackView.bottomAnchor, constant: 24),
+            sendButton.topAnchor.constraint(equalTo: checkboxStackView.bottomAnchor, constant: 8),
             sendButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
             sendButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
         ])
@@ -115,7 +117,7 @@ class ViewController: UIViewController {
     }()
     lazy var checkbox2Button: UIButton = {
         var checkbox2Button = UIButton()
-        checkbox2Button.setTitle("checkbox3", for: .normal)
+        checkbox2Button.setTitle("checkbox2", for: .normal)
         checkbox2Button.backgroundColor = .lightGray
         checkbox2Button.setTitleColor(.black, for: .normal)
         checkbox2Button.layer.cornerRadius = 5
@@ -130,12 +132,30 @@ class ViewController: UIViewController {
         return checkbox3Button
     }()
     
+    lazy var aboutLabel: UILabel = {
+        var aboutLabel: UILabel = UILabel(frame: .zero)
+        view.addSubview(aboutLabel)
+        aboutLabel.translatesAutoresizingMaskIntoConstraints = false
+        aboutLabel.textColor = .darkGray
+        aboutLabel.textAlignment = .center
+        aboutLabel.adjustsFontSizeToFitWidth = true
+        aboutLabel.numberOfLines = 0
+        NSLayoutConstraint.activate([
+            aboutLabel.topAnchor.constraint(greaterThanOrEqualTo: sendButton.bottomAnchor, constant: 100),
+            aboutLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            aboutLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
+            aboutLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+        ])
+        return aboutLabel
+    }()
+    
     var modeArray = ["radiobutton1", "radiobutton2", "radiobutton3"]
     var lastText = ""
     
     var result: ResponceModel? {
         didSet {
             sendButton.isEnabled = false
+            titleLabel.text = "Вынік"
             textView.backgroundColor = .yellow
             textView.text = ""
             textView.text = result!.result
@@ -152,6 +172,7 @@ class ViewController: UIViewController {
         checkbox1Button.addTarget(self, action: #selector(checkboxAction1), for: .touchUpInside)
         checkbox2Button.addTarget(self, action: #selector(checkboxAction2), for: .touchUpInside)
         checkbox3Button.addTarget(self, action: #selector(checkboxAction3), for: .touchUpInside)
+        aboutLabel.text = "Мы будзем рады атрымаць зваротную сувязь ад Вас на e-mail corpus.by@gmail.com.\nНашы іншыя прататыпы: corpus.by, ssrlab.by. \nЛабараторыя распазнавання і сінтэзу маўлення, АІПІ НАН Беларусі, 2016—2022"
         view.backgroundColor = .lightGray
     }
     @objc func send() {
@@ -211,6 +232,7 @@ class ViewController: UIViewController {
 extension ViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         sendButton.isEnabled = true
+        titleLabel.text = "Калі ласка, увядзіце тэкст"
         textView.text = lastText
         textView.backgroundColor = .white
     }
